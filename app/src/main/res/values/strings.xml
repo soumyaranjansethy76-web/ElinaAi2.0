@@ -1,0 +1,4 @@
+<resources>
+<string name="app_name">Elina</string>
+<string name="accessibility_description">Elina device control service. Operates supported visible UI controls only after the user enables this service.</string>
+</resources>

@@ -1,0 +1,1 @@
+<voice-interaction-service xmlns:android="http://schemas.android.com/apk/res/android" android:sessionService="com.elina.assistant.service.ElinaVoiceInteractionSessionService" android:recognitionService="" android:settingsActivity="com.elina.assistant.ui.settings.SettingsActivity" android:supportsAssist="true" android:supportsLaunchFromKeyguard="true" />

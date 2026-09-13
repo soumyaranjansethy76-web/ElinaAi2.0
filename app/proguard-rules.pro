@@ -1,0 +1,2 @@
+-keepclassmembers class com.elina.assistant.ui.main.AvatarSceneView { @android.webkit.JavascriptInterface <methods>; }
+-keep class com.elina.assistant.memory.**_Impl { *; }

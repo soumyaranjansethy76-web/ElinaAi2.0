@@ -1,0 +1,16 @@
+.github/workflows/android.yml
+.gitignore
+README.md
+app/build.gradle.kts
+app/proguard-rules.pro
+app/src/main/AndroidManifest.xml
+build.gradle.kts
+docs/BUILD_VERIFICATION.md
+docs/FILE_INDEX.txt
+docs/IMPLEMENTATION_NOTES.md
+gradle.properties
+gradle/wrapper/gradle-wrapper.properties
+gradlew
+settings.gradle.kts
+tools/__pycache__/validate_vrm.cpython-313.pyc
+tools/validate_vrm.py
