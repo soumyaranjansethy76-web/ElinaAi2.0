@@ -31,7 +31,7 @@ jobs:
           test -f gradlew || { echo "::error::gradlew is missing from the repository root."; exit 1; }
           test -f app/build.gradle.kts || { echo "::error::app/build.gradle.kts is missing."; exit 1; }
           test -f app/src/main/AndroidManifest.xml || { echo "::error::AndroidManifest.xml is missing."; exit 1; }
-          test -f app/src/main/assets/avatar/model.vrm || { echo "::error::app/src/main/assets/avatar/model.vrm is missing. Check that it was actually committed (not excluded by .gitignore)."; exit 1; }
+          test -f app/src/main/assets/avatar/elina.vrm || { echo "::error::app/src/main/assets/avatar/elina.vrm is missing. Check that it was actually committed (not excluded by .gitignore)."; exit 1; }
           chmod +x gradlew
 
       - name: Build signed release APK
