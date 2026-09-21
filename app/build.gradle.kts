@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
 }
 
@@ -17,7 +16,6 @@ android {
     }
     buildFeatures { viewBinding = true }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
-    kotlinOptions { jvmTarget = "17" }
     signingConfigs {
         create("elinaRelease") {
             val path = System.getenv("ELINA_KEYSTORE_PATH")
@@ -55,5 +53,3 @@ dependencies {
     implementation("androidx.webkit:webkit:1.14.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }
-
-kotlin { jvmToolchain(17) }
