@@ -24,13 +24,12 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Verify project
         shell: bash
         run: |
           set -e
+
+          echo "=== Checking project files ==="
 
           test -f gradlew || {
             echo "::error::gradlew is missing from the repository root."
@@ -48,17 +47,46 @@ jobs:
           }
 
           test -f app/src/main/assets/avatar/elina.vrm || {
-            echo "::error::app/src/main/assets/avatar/elina.vrm is missing. Check that it was actually committed and is not excluded by .gitignore."
+            echo "::error::app/src/main/assets/avatar/elina.vrm is missing. Check that the file was committed to the repository."
             exit 1
           }
 
           chmod +x gradlew
 
+          echo "=== Project verification passed ==="
+          echo "VRM asset found:"
+          ls -lh app/src/main/assets/avatar/elina.vrm
+
+      - name: Show Android environment
+        shell: bash
+        run: |
+          set -e
+
+          echo "ANDROID_HOME=${ANDROID_HOME:-not-set}"
+          echo "ANDROID_SDK_ROOT=${ANDROID_SDK_ROOT:-not-set}"
+
+          if [ -n "${ANDROID_HOME:-}" ] && [ -d "$ANDROID_HOME" ]; then
+            echo "Android SDK found at:"
+            echo "$ANDROID_HOME"
+          elif [ -n "${ANDROID_SDK_ROOT:-}" ] && [ -d "$ANDROID_SDK_ROOT" ]; then
+            echo "Android SDK found at:"
+            echo "$ANDROID_SDK_ROOT"
+            export ANDROID_HOME="$ANDROID_SDK_ROOT"
+          else
+            echo "::error::Android SDK was not found on the GitHub runner."
+            exit 1
+          fi
+
       - name: Build release APK
         shell: bash
         run: |
           set -e
-          ./gradlew assembleRelease --no-daemon --stacktrace
+
+          echo "=== Starting Gradle release build ==="
+
+          ./gradlew assembleRelease \
+            --no-daemon \
+            --stacktrace
 
       - name: Verify exactly one APK
         shell: bash
@@ -68,36 +96,41 @@ jobs:
           APK_DIR="app/build/outputs/apk/release"
 
           if [ ! -d "$APK_DIR" ]; then
-            echo "::error::Expected output directory $APK_DIR does not exist — assembleRelease did not produce it."
+            echo "::error::Expected output directory $APK_DIR does not exist."
+            echo "::error::assembleRelease did not produce the expected output directory."
             exit 1
           fi
 
           mapfile -t APKS < <(
-            find "$APK_DIR" -maxdepth 1 -type f -name "*.apk"
+            find "$APK_DIR" \
+              -maxdepth 1 \
+              -type f \
+              -name "*.apk"
           )
 
           echo "Found ${#APKS[@]} APK(s) in $APK_DIR:"
           printf '  %s\n' "${APKS[@]}"
 
           if [ "${#APKS[@]}" -eq 0 ]; then
-            echo "::error::No release APK was produced in $APK_DIR."
+            echo "::error::No release APK was produced."
             exit 1
           fi
 
           if [ "${#APKS[@]}" -gt 1 ]; then
-            echo "::error::Found ${#APKS[@]} APKs in $APK_DIR, expected exactly 1. Refusing to guess which one to upload."
+            echo "::error::Found ${#APKS[@]} APKs. Expected exactly one APK."
             exit 1
           fi
 
           APK="${APKS[0]}"
 
-          test -f "$APK" || {
+          if [ ! -f "$APK" ]; then
             echo "::error::$APK is not a regular file."
             exit 1
-          }
+          fi
 
           echo "APK=$APK" >> "$GITHUB_ENV"
 
+          echo "=== APK found ==="
           ls -lh "$APK"
 
       - name: Verify signing
@@ -105,8 +138,24 @@ jobs:
         run: |
           set -e
 
+          if [ -n "${ANDROID_HOME:-}" ] && [ -d "$ANDROID_HOME" ]; then
+            SDK_ROOT="$ANDROID_HOME"
+          elif [ -n "${ANDROID_SDK_ROOT:-}" ] && [ -d "$ANDROID_SDK_ROOT" ]; then
+            SDK_ROOT="$ANDROID_SDK_ROOT"
+          else
+            echo "::error::Android SDK path is unavailable."
+            exit 1
+          fi
+
+          BUILD_TOOLS_DIR="$SDK_ROOT/build-tools"
+
+          if [ ! -d "$BUILD_TOOLS_DIR" ]; then
+            echo "::error::Android build-tools directory was not found at $BUILD_TOOLS_DIR"
+            exit 1
+          fi
+
           SDK_BUILD_TOOLS=$(
-            find "$ANDROID_HOME/build-tools" \
+            find "$BUILD_TOOLS_DIR" \
               -maxdepth 1 \
               -mindepth 1 \
               -type d \
@@ -115,21 +164,23 @@ jobs:
           )
 
           if [ -z "$SDK_BUILD_TOOLS" ]; then
-            echo "::error::No Android build-tools directory found under \$ANDROID_HOME — cannot verify signing."
+            echo "::error::No Android build-tools version was found."
             exit 1
           fi
 
           APKSIGNER="$SDK_BUILD_TOOLS/apksigner"
 
           if [ ! -x "$APKSIGNER" ]; then
-            echo "::error::apksigner was not found at $APKSIGNER."
+            echo "::error::apksigner was not found at $APKSIGNER"
             exit 1
           fi
 
-          "$APKSIGNER" verify --verbose "$APK" || {
-            echo "::error::apksigner could not verify the signature on $APK — the release APK is not properly signed and will not install."
-            exit 1
-          }
+          echo "Using apksigner:"
+          echo "$APKSIGNER"
+
+          "$APKSIGNER" verify --verbose "$APK"
+
+          echo "=== APK signing verification passed ==="
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
