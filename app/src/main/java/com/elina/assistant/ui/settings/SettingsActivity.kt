@@ -50,24 +50,34 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             b.authStatus.text =
-                "API authentication: \${if(app.security.hasCredential()) "configured" else "not configured"}"
+                "API authentication: ${if(app.security.hasCredential()) "configured" else "not configured"}"
 
             val r = com.elina.assistant.avatar.AvatarAssetLoader(this@SettingsActivity).inspect()
             b.avatarInfo.text =
-                "Avatar: Elina VRM\n" +
-                    "VRM version: \${r.version}\n" +
-                    "Humanoid: \${r.humanoid}\n" +
-                    "Spring Bone: \${r.springBone}\n" +
-                    "Expressions: \${r.expressions.joinToString()}\n" +
-                    "Lip Sync: \${listOf("A", "I", "U", "E", "O").all{r.expressions.contains(it)}}\n" +
-                    "LookAt: Limited (VRM 0.x asset)\n" +
-                    "SHA-256: \${r.sha256}"
+                "Avatar: Elina VRM
+" +
+                    "VRM version: ${r.version}
+" +
+                    "Humanoid: ${r.humanoid}
+" +
+                    "Spring Bone: ${r.springBone}
+" +
+                    "Expressions: ${r.expressions.joinToString()}
+" +
+                    "Lip Sync: ${listOf("A", "I", "U", "E", "O").all { r.expressions.contains(it) }}
+" +
+                    "LookAt: Limited (VRM 0.x asset)
+" +
+                    "SHA-256: ${r.sha256}"
 
             b.capabilities.text =
-                "Microphone: \${PermissionManager.micGranted(this@SettingsActivity)}\n" +
-                    "Accessibility: \${PermissionManager.accessibilityEnabled(this@SettingsActivity)}\n" +
-                    "Overlay: \${PermissionManager.overlayGranted(this@SettingsActivity)}\n" +
-                    "Background wake: \${DeviceCapabilityChecker.status(this@SettingsActivity).wake}"
+                "Microphone: ${PermissionManager.micGranted(this@SettingsActivity)}
+" +
+                    "Accessibility: ${PermissionManager.accessibilityEnabled(this@SettingsActivity)}
+" +
+                    "Overlay: ${PermissionManager.overlayGranted(this@SettingsActivity)}
+" +
+                    "Background wake: ${DeviceCapabilityChecker.status(this@SettingsActivity).wake}"
         }
 
         b.saveKey.setOnClickListener {
