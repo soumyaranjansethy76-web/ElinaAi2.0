@@ -63,7 +63,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    private fun connect(s: com.elina.assistant.util.SettingsSnapshot) {
+    private suspend fun connect(s: com.elina.assistant.util.SettingsSnapshot) {
         if (_state.value == ElinaState.CONNECTING || _state.value == ElinaState.SPEAKING) {
             return
         }
