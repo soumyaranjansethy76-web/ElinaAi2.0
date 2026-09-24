@@ -11,6 +11,7 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -317,7 +318,7 @@ class MainActivity : AppCompatActivity() {
                 state == WakeWordState.LISTENING_FOR_WAKE -> "Listening for \"Hey Elina\""
                 state == WakeWordState.ERROR -> "Error — turned back off"
                 state == WakeWordState.READY -> "Starting…"
-                state == WakeWordState.WAKE_DETECTED, state == WakeWordState.STARTING_CONVERSATION -> "Heard you!"
+                state == WakeWordState.WAKE_DETECTED || state == WakeWordState.STARTING_CONVERSATION -> "Heard you!"
                 else -> "On"
             }
             if (wakeSwitch.isChecked != wakeEnabled) wakeSwitch.isChecked = wakeEnabled
@@ -418,7 +419,7 @@ class MainActivity : AppCompatActivity() {
         val label = when {
             !wakeEnabled -> "Hey Elina: Off"
             state == WakeWordState.LISTENING_FOR_WAKE -> "Hey Elina: Listening"
-            state == WakeWordState.WAKE_DETECTED, state == WakeWordState.STARTING_CONVERSATION -> "Hey Elina: Heard you!"
+            state == WakeWordState.WAKE_DETECTED || state == WakeWordState.STARTING_CONVERSATION -> "Hey Elina: Heard you!"
             state == WakeWordState.ERROR -> "Hey Elina: Error"
             state == WakeWordState.READY -> "Hey Elina: Starting…"
             else -> "Hey Elina: On"
