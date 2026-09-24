@@ -81,7 +81,7 @@ class GeminiLiveManager(
         private const val MAX_RECONNECT_ATTEMPTS = 3
     }
 
-    private val http = OkHttpClient.Builder().pingInterval(20, TimeUnit.SECONDS).build()
+    private val http = OkHttpClient.Builder().readTimeout(0, TimeUnit.MILLISECONDS).pingInterval(20, TimeUnit.SECONDS).build()
     private val restFallback = GeminiRestFallback()
     private val fallbackScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
@@ -695,6 +695,7 @@ class GeminiLiveManager(
         }
 
         override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
+            disarmSetupWatchdog()
             callback.onError("DEBUG: WebSocket closed code=$code reason=$reason")
             disarmResponseWatchdog()
             closeAudio()
