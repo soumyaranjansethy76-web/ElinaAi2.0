@@ -42,7 +42,7 @@ object AppConfig {
         llmBaseUrl = p.getString(KEY_URL, llmBaseUrl) ?: llmBaseUrl
         llmApiKey = p.getString(KEY_API, "") ?: ""
         llmModel = p.getString(KEY_MODEL, llmModel) ?: llmModel
-        liveModel = p.getString(KEY_LIVE_MODEL, liveModel) ?: liveModel
+        liveModel = (p.getString(KEY_LIVE_MODEL, liveModel) ?: liveModel).let { if (it == "gemini-3.1-flash-live-preview") "gemini-3.8-live" else it }
         liveVoice = p.getString(KEY_LIVE_VOICE, liveVoice) ?: liveVoice
         wakeWordEnabled = p.getBoolean(KEY_WAKE_WORD, false)
     }
