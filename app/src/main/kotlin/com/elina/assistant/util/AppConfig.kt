@@ -15,7 +15,7 @@ object AppConfig {
     var llmBaseUrl: String = "https://generativelanguage.googleapis.com/v1beta/openai/"
     var llmApiKey: String = ""
     var llmModel: String = "gemini-3.8-flash"
-    var liveModel: String = "gemini-3.1-flash-live-preview"
+    var liveModel: String = "gemini-3.8-live"
     var liveVoice: String = "Kore"
 
     /** Persisted "Hey Elina" user preference. Defaults to OFF — the feature must be explicitly enabled. */
@@ -68,7 +68,7 @@ object AppConfig {
     }
 
     fun saveLiveModel(context: Context, model: String) {
-        liveModel = model.trim().ifBlank { "gemini-3.1-flash-live-preview" }
+        liveModel = model.trim().ifBlank { "gemini-3.8-live" }
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
             .edit()
             .putString(KEY_LIVE_MODEL, liveModel)

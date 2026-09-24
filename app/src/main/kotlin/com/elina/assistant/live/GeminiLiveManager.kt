@@ -66,7 +66,7 @@ class GeminiLiveManager(
     }
 
     companion object {
-        const val MODEL = "gemini-3.1-flash-live-preview"
+        const val MODEL = "gemini-3.8-live"
         private const val WS_BASE = "wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent"
         private const val INPUT_RATE = 16000
         private const val OUTPUT_RATE = 24000
@@ -156,7 +156,7 @@ class GeminiLiveManager(
         setupComplete = false
         running = true
         setState(ConnectionState.CONNECTING)
-        val request = Request.Builder().url(WS_BASE).header("x-goog-api-key", key).build()
+        val request = Request.Builder().url("$WS_BASE?key=${java.net.URLEncoder.encode(key, "UTF-8")}").build()
         socket = http.newWebSocket(request, listener)
         armSetupWatchdog()
     }
@@ -565,7 +565,6 @@ class GeminiLiveManager(
             })
         val generationConfig = JSONObject()
             .put("responseModalities", JSONArray().put("AUDIO"))
-            .put("thinkingConfig", JSONObject().put("thinkingLevel", "minimal"))
             .put(
                 "speechConfig",
                 JSONObject().put(
