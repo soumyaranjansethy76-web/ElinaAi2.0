@@ -1,26 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
-    <application android:name=".ElinaApplication" android:allowBackup="true" android:label="Elina" android:theme="@style/Theme.Elina" android:supportsRtl="true" android:usesCleartextTraffic="false">
-        <activity android:name=".ui.settings.SettingsActivity" />
-        <activity android:name=".ui.memory.MemoryActivity" />
-        <activity android:name=".ui.main.MainActivity" android:exported="true">
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+    </queries>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ElinaAI">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="unspecified"
+            android:configChanges="orientation|screenSize|keyboardHidden|uiMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <service android:name=".service.ElinaAccessibilityService" android:exported="false" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
-            <intent-filter><action android:name="android.accessibilityservice.AccessibilityService" /></intent-filter>
-            <meta-data android:name="android.accessibilityservice" android:resource="@xml/accessibility_service_config" />
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false"
+            android:screenOrientation="unspecified"
+            android:parentActivityName=".MainActivity" />
+
+        <service
+            android:name=".service.WakeWordService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
+        <service
+            android:name=".service.ElinaAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
         </service>
-        <service android:name=".service.ElinaVoiceInteractionService" android:exported="true" android:permission="android.permission.BIND_VOICE_INTERACTION">
-            <intent-filter><action android:name="android.service.voice.VoiceInteractionService" /></intent-filter>
-            <meta-data android:name="android.voice_interaction_service" android:resource="@xml/voice_interaction_service" />
-        </service>
-        <service android:name=".service.ElinaVoiceInteractionSessionService" android:exported="false" android:permission="android.permission.BIND_VOICE_INTERACTION" />
+
     </application>
 </manifest>

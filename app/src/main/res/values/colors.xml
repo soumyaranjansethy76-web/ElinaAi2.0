@@ -1,1 +1,21 @@
-<resources><color name="elina_bg">#050505</color><color name="elina_primary">#FF1744</color><color name="elina_secondary">#D500F9</color><color name="elina_card">#111111</color><color name="elina_text">#EEEEEE</color><color name="elina_muted">#666666</color><color name="elina_success">#00E676</color></resources>
+<resources>
+    <color name="bg_canvas">#101114</color>
+    <color name="bg_panel">#17191E</color>
+    <color name="text_primary">#F5F5F7</color>
+    <color name="text_secondary">#A9ADB7</color>
+    <color name="text_muted">#777C88</color>
+    <color name="bg_message_assistant">#20232B</color>
+    <color name="bg_message_user">#2C2438</color>
+    <color name="ptt_recording">#D85A72</color>
+    <color name="ptt_idle">#2A3340</color>
+    <color name="brand_primary">#C9A7FF</color>
+    <color name="brand_primary_dark">#9674D6</color>
+    <color name="brand_accent">#77D9FF</color>
+
+    <!-- Voice/connection state indicator colors -->
+    <color name="state_ready">#6FCF97</color>
+    <color name="state_listening">#77D9FF</color>
+    <color name="state_thinking">#F2C94C</color>
+    <color name="state_speaking">#C9A7FF</color>
+    <color name="state_error">#D85A72</color>
+</resources>

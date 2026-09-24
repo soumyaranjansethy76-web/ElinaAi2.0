@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="12dp">
+
+        <!-- AI / Voice -->
+        <TextView style="@style/SettingsSectionHeader" android:text="@string/settings_section_ai_voice" />
+        <com.google.android.material.card.MaterialCardView style="@style/SettingsCard">
+            <LinearLayout style="@style/SettingsCardInner">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/settings_api_key_label"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/apiKeyStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEditApiKey"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="44dp"
+                        android:text="@string/settings_edit" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/liveModelInput"
+                    style="@style/SettingsFieldInput"
+                    android:layout_marginTop="14dp"
+                    android:hint="@string/settings_live_model_hint" />
+
+                <EditText
+                    android:id="@+id/liveVoiceInput"
+                    style="@style/SettingsFieldInput"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/settings_live_voice_hint" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Memory -->
+        <TextView style="@style/SettingsSectionHeader" android:text="@string/settings_section_memory" />
+        <com.google.android.material.card.MaterialCardView style="@style/SettingsCard">
+            <LinearLayout style="@style/SettingsCardInner">
+
+                <TextView
+                    android:id="@+id/memoryStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:maxLines="6"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/settings_memory_note"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnClearMemory"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:minHeight="44dp"
+                    android:text="@string/settings_clear_memory" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Device Control (Accessibility) -->
+        <TextView style="@style/SettingsSectionHeader" android:text="@string/settings_section_device_control" />
+        <com.google.android.material.card.MaterialCardView style="@style/SettingsCard">
+            <LinearLayout style="@style/SettingsCardInner">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:id="@+id/accessibilityDot"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/dot_status" />
+
+                    <TextView
+                        android:id="@+id/accessibilityStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAccessibilitySettings"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="44dp"
+                        android:text="@string/settings_open" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/settings_accessibility_capabilities"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:lineSpacingMultiplier="1.2" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Wake Word -->
+        <TextView style="@style/SettingsSectionHeader" android:text="@string/settings_section_wake_word" />
+        <com.google.android.material.card.MaterialCardView style="@style/SettingsCard">
+            <LinearLayout style="@style/SettingsCardInner">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/settings_wake_word_label"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/wakeWordSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/wakeWordStatusText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/settings_wake_word_note"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:lineSpacingMultiplier="1.2" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- About / Diagnostics -->
+        <TextView style="@style/SettingsSectionHeader" android:text="@string/settings_section_about" />
+        <com.google.android.material.card.MaterialCardView style="@style/SettingsCard">
+            <LinearLayout style="@style/SettingsCardInner">
+                <TextView
+                    android:id="@+id/aboutText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:lineSpacingMultiplier="1.3" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

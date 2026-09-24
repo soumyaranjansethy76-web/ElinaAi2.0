@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_history"
+        android:title="@string/action_history"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_clear"
+        android:title="@string/action_clear"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_device_controls"
+        android:title="@string/action_device_controls"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_wake_word"
+        android:title="@string/action_wake_word"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_memory"
+        android:title="@string/action_memory"
+        app:showAsAction="never" />
+</menu>

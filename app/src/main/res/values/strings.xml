@@ -1,4 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Elina</string>
-<string name="accessibility_description">Elina device control service. Operates supported visible UI controls only after the user enables this service.</string>
+    <string name="app_name">ElinaAI</string>
+    <string name="app_subtitle">Your AI companion</string>
+    <string name="status_idle">Elina is ready</string>
+    <string name="status_api_key_required">API key required — add it in AI settings</string>
+    <string name="status_connecting">Connecting to Elina…</string>
+    <string name="status_listening">Listening… release to send</string>
+    <string name="status_thinking">Thinking…</string>
+    <string name="status_speaking">Speaking…</string>
+    <string name="status_error">Error: %1$s</string>
+    <string name="ptt_label">Hold to talk</string>
+    <string name="start_live_label">Start Live</string>
+    <string name="stop_live_label">Stop Live</string>
+    <string name="action_device_controls">Device controls</string>
+    <string name="action_wake_word">Wake word: Hey Elina</string>
+    <string name="action_memory">Memory</string>
+    <string name="send_label">Send</string>
+    <string name="hint_message">Talk to Elina…</string>
+    <string name="action_history">History</string>
+    <string name="action_settings">AI settings</string>
+    <string name="action_clear">Clear conversation</string>
+    <string name="history_title">History</string>
+    <string name="history_empty">No conversations yet</string>
+    <string name="history_resume">Resume</string>
+    <string name="history_delete">Delete</string>
+    <string name="role_user">You</string>
+    <string name="role_assistant">Elina</string>
+
+    <!-- Unified settings panel (Phase 9B) -->
+    <string name="settings_section_ai_voice">AI / VOICE</string>
+    <string name="settings_section_memory">MEMORY</string>
+    <string name="settings_section_device_control">DEVICE CONTROL</string>
+    <string name="settings_section_wake_word">WAKE WORD</string>
+    <string name="settings_section_about">ABOUT</string>
+    <string name="settings_api_key_label">Gemini API key</string>
+    <string name="settings_api_key_configured">Configured</string>
+    <string name="settings_api_key_not_configured">Not configured</string>
+    <string name="settings_edit">Edit</string>
+    <string name="settings_open">Open</string>
+    <string name="settings_live_model_hint">Live model</string>
+    <string name="settings_live_voice_hint">Live voice (for example Kore)</string>
+    <string name="settings_memory_note">Only memories relevant to what you\'re asking are sent to Gemini — never the whole list.</string>
+    <string name="settings_clear_memory">Clear memory</string>
+    <string name="settings_clear_memory_confirm_title">Clear memory?</string>
+    <string name="settings_clear_memory_confirm_message">This removes everything Elina has explicitly remembered. This can\'t be undone.</string>
+    <string name="settings_accessibility_capabilities">Tap, swipe, type, back/home/recents, open app, open URL, and YouTube search — only when you ask for them.</string>
+    <string name="settings_wake_word_label">"Hey Elina"</string>
+    <string name="settings_wake_word_note">Uses the device\'s speech recognizer, not a guaranteed always-on offline detector — it can be affected by battery/background restrictions.</string>
+    <string name="settings_api_key_dialog_title">Gemini API key</string>
+    <string name="settings_api_key_dialog_message">Stored only in this app\'s private storage. Get a key from Google AI Studio.</string>
+    <string name="settings_api_key_hint_replace">Enter a new key to replace it</string>
+    <string name="settings_saved_reconnect">Saved. Start a new Live session to reconnect.</string>
+    <string name="permission_record_audio_rationale">Microphone access is needed for voice conversations</string>
+    <string name="accessibility_description">Allows Elina to perform user-requested taps, swipes, navigation and text entry after you explicitly enable Device controls.</string>
 </resources>
