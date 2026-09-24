@@ -588,10 +588,12 @@ class GeminiLiveManager(
     private val listener = object : WebSocketListener() {
         override fun onOpen(webSocket: WebSocket, response: Response) {
             // Do not report the session as connected until Gemini accepts setup.
+            callback.onError("DEBUG: WebSocket opened. Sending Live setup...")
             webSocket.send(setupJson())
         }
 
         override fun onMessage(webSocket: WebSocket, text: String) {
+            callback.onError("DEBUG: Live server message received (${text.length} chars)")
             try {
                 val root = JSONObject(text)
                 root.optJSONObject("error")?.let { err ->
@@ -677,6 +679,7 @@ class GeminiLiveManager(
         }
 
         override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
+            callback.onError("DEBUG: WebSocket failure HTTP=${response?.code ?: -1}: ${t.message ?: "unknown"}")
             logE("Gemini Live websocket failed", t)
             disarmResponseWatchdog()
             disarmSetupWatchdog()
@@ -692,6 +695,7 @@ class GeminiLiveManager(
         }
 
         override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
+            callback.onError("DEBUG: WebSocket closed code=$code reason=$reason")
             disarmResponseWatchdog()
             closeAudio()
             if (!userClosed && !terminalErrorReported && code != 1000) {
